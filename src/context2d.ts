@@ -190,19 +190,6 @@ export type ImageSmoothingQuality = keyof typeof CImageSmoothingQuality;
 const METRICS = new Float32Array(7);
 const METRICS_PTR = Deno.UnsafePointer.of(METRICS);
 
-export interface TextMetrics {
-  width: number;
-  actualBoundingBoxLeft: number;
-  actualBoundingBoxRight: number;
-  actualBoundingBoxAscent: number;
-  actualBoundingBoxDescent: number;
-  fontBoundingBoxAscent: number;
-  fontBoundingBoxDescent: number;
-  alphabeticBaseline: number;
-  emHeightAscent: number;
-  emHeightDescent: number;
-}
-
 export type Style = string | CanvasGradient | CanvasPattern;
 
 const CFontStretch = {
