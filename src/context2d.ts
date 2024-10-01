@@ -248,7 +248,7 @@ const _filter = Symbol("[[filter]]");
 /**
  * @link https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
  */
-export class CanvasRenderingContext2D {
+export class Context2D implements CanvasRenderingContext2D {
   /// Internal State
 
   [_canvas]: Canvas;

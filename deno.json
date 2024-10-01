@@ -21,5 +21,9 @@
 
   "fmt": {
     "exclude": ["skia", "bench/node_modules", "build", "native/build"]
+  },
+
+  "compilerOptions": {
+    "lib": ["deno.ns", "deno.window", "deno.unstable", "esnext", "dom"]
   }
 }

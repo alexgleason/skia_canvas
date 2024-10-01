@@ -1,4 +1,5 @@
-import { CanvasRenderingContext2D } from "./context2d.ts";
+
+import { Context2D } from "./context2d.ts";
 import ffi, { cstr, encodeBase64, getBuffer } from "./ffi.ts";
 import { ColorSpace } from "./image.ts";
 
@@ -54,7 +55,7 @@ const _ctx = Symbol("[[ctx]]");
  *
  * @link https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
  */
-export class Canvas {
+export class Canvas implements HTMLCanvasElement {
   [_ptr]: Deno.PointerValue;
   [_width]: number;
   [_height]: number;
@@ -98,7 +99,7 @@ export class Canvas {
     CANVAS_FINALIZER.register(this, this[_ptr]);
     this[_width] = width;
     this[_height] = height;
-    this[_ctx] = new CanvasRenderingContext2D(
+    this[_ctx] = new Context2D(
       this,
       sk_canvas_get_context(
         this[_ptr],
@@ -202,7 +203,7 @@ export class Canvas {
     const ctxPtr = sk_canvas_get_context(this[_ptr]);
     // In case the context is still being used, we'll just update its pointer
     this[_ctx]._unsafePointer = ctxPtr;
-    this[_ctx] = new CanvasRenderingContext2D(this, ctxPtr);
+    this[_ctx] = new Context2D(this, ctxPtr);
   }
 
   /** Only for GPU backed: Flushes all draw calls, call before swap */
