@@ -218,7 +218,6 @@ const CFontVariantCaps = {
   ["small-caps"]: 1,
 } as const;
 
-export type FontStretch = keyof typeof CFontStretch;
 export type FontVariantCaps = keyof typeof CFontVariantCaps;
 
 const _canvas = Symbol("[[canvas]]");
@@ -245,7 +244,7 @@ export class Context2D implements CanvasRenderingContext2D {
   [_strokeStyle]: Style = "black";
   [_shadowColor] = "black";
   [_font] = "10px sans-serif";
-  [_fontStretch]: FontStretch = "normal";
+  [_fontStretch]: CanvasFontStretch = "normal";
   [_fontVariantCaps]: FontVariantCaps = "normal";
   [_lineDash]: number[] = [];
   [_filter] = "none";
@@ -340,6 +339,8 @@ export class Context2D implements CanvasRenderingContext2D {
         alphabeticBaseline: 0,
         emHeightAscent: 0,
         emHeightDescent: 0,
+        hangingBaseline: 0,
+        ideographicBaseline: 0,
       };
     }
     const encoded = new TextEncoder().encode(text);
@@ -493,7 +494,7 @@ export class Context2D implements CanvasRenderingContext2D {
     sk_context_set_word_spacing(this[_ptr], value);
   }
 
-  get fontKerning(): string {
+  get fontKerning(): CanvasFontKerning {
     return "auto";
   }
 
@@ -503,11 +504,11 @@ export class Context2D implements CanvasRenderingContext2D {
     }
   }
 
-  get fontStretch(): FontStretch {
+  get fontStretch(): CanvasFontStretch {
     return this[_fontStretch];
   }
 
-  set fontStretch(value: FontStretch) {
+  set fontStretch(value: CanvasFontStretch) {
     const c = CFontStretch[value];
     if (typeof c !== "number") {
       throw new Error("invalid fontStretch");
