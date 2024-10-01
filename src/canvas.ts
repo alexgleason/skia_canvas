@@ -1,4 +1,3 @@
-
 import { Context2D } from "./context2d.ts";
 import ffi, { cstr, encodeBase64, getBuffer } from "./ffi.ts";
 import { ColorSpace } from "./image.ts";
@@ -224,6 +223,10 @@ export class Canvas implements HTMLCanvasElement {
  * Only pass `gpu: true` if you have an OpenGL context initialized
  * and made current already.
  */
-export function createCanvas(width: number, height: number, gpu?: boolean): Canvas {
+export function createCanvas(
+  width: number,
+  height: number,
+  gpu?: boolean,
+): Canvas {
   return new Canvas(width, height, gpu);
 }
